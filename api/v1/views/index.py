@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+""" Index """
 from flask import jsonify
 from api.v1.views import app_views
 
@@ -7,4 +8,3 @@ from api.v1.views import app_views
 def get_status():
     """Returns a JSON status"""
     return jsonify({"status": "OK"})
-

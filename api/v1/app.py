@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+""" Script to run Flask """
 from flask import Flask
 import os
 from models import storage
