@@ -19,7 +19,7 @@ def city_places(city_id):
     """
         Handles places in a specified city
     """
-    city = storage.get(City, city_id)
+    city = storage.get("City", city_id)
     if city is None:
         abort(404)
     if request.method == 'GET':
@@ -33,7 +33,7 @@ def city_places(city_id):
             abort(400, 'Not a JSON')
         if 'user_id' not in info:
             abort(400, 'Missing user_id')
-        user = storage.get(User, info['user_id'])
+        user = storage.get("User", info['user_id'])
         if user is None:
             abort(404)
         if 'name' not in info:
@@ -50,7 +50,7 @@ def place_object(place_id):
     """
     Handles a specified Place
     """
-    place = storage.get(Place, place_id)
+    place = storage.get("Place", place_id)
     if place is None:
         abort(404)
     if request.method == 'GET':
@@ -99,7 +99,7 @@ def place_search():
     if 'amenities' in info and len(info['amenities']) > 0:
         for place in places.values():
             for a_id in info['amenities']:
-                amenity = storage.get(Amenity, a_id)
+                amenity = storage.get("Amenity", a_id)
                 if amenity in place.amenities and place not in place_list:
                     place_list.append(place)
                 elif amenity not in place.amenities:
@@ -118,7 +118,7 @@ def place_search():
                     tmp.append(place)
         if 'states' in info and len(info['states']) > 0:
             for s_id in info['states']:
-                state = storage.get(State, s_id)
+                state = storage.get("State", s_id)
                 for city in state.cities:
                     if city.id in info['cities']:
                         count = 2
@@ -127,7 +127,7 @@ def place_search():
                     continue
                 for place in place_list:
                     city_id = place.city_id
-                    city = storage.get(City, city_id)
+                    city = storage.get("City", city_id)
                     if city.state_id == s_id and place not in tmp:
                         tmp.append(place)
         place_list = tmp
@@ -136,7 +136,7 @@ def place_search():
         for s_id in info['states']:
             for place in place_list:
                 city_id = place.city_id
-                city = storage.get(City, city_id)
+                city = storage.get("City", city_id)
                 if city.state_id == s_id:
                     tmp.append(place)
         place_list = tmp
