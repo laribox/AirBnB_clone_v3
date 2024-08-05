@@ -80,7 +80,7 @@ def reviews_id_mothods(review_id):
             storage.delete(reviews[key])
             storage.save()
             return jsonify({}), 200
-        except Execption as e:
+        except KeyError:
             abort(404)
 
     # PUT REQUESTS
